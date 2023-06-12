@@ -6,20 +6,20 @@ using Million.Services.Filters;
 using Million.Services.Utils;
 using System.Linq.Expressions;
 
-namespace Million.Services.UseCases
+namespace Million.Services.UseCases.PropertyUseCases
 {
     public sealed class GetPropertiesUseCase
     {
         private readonly IMapper _mapper;
         private readonly IRepository<Property> _repository;
 
-        public GetPropertiesUseCase(IMapper mapper, IRepository<Property> repository) 
+        public GetPropertiesUseCase(IMapper mapper, IRepository<Property> repository)
         {
             _mapper = mapper;
             _repository = repository;
         }
 
-        public IEnumerable<PropertyResponse> Execute(PropertyFilter filter) 
+        public IEnumerable<PropertyResponse> Execute(PropertyFilter filter)
         {
             Expression<Func<Property, bool>> filterExpression = p => true;
 

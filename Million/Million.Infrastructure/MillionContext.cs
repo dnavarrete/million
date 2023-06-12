@@ -12,9 +12,12 @@ namespace Million.Infrastructure
 
         public DbSet<Property> Properties { get; set; } = null!;
 
+        public DbSet<PropertyImage> PropertyImages { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PropertyConfiguration());
+            modelBuilder.ApplyConfiguration(new PropertyImageConfiguration());
         }
     }
 }

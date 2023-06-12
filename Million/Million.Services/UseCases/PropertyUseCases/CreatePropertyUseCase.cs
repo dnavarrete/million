@@ -5,7 +5,7 @@ using Million.Services.Filters;
 using System.Linq.Expressions;
 using AutoMapper;
 
-namespace Million.Services.UseCases
+namespace Million.Services.UseCases.PropertyUseCases
 {
     public sealed class CreatePropertyUseCase
     {
