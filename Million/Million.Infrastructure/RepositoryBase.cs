@@ -16,5 +16,11 @@ namespace Million.Infrastructure
         {
             return _context.Set<T>().Where(predicate);
         }
+
+        public void Insert(T entity)
+        {
+            _context.Set<T>().Add(entity);
+            _context.SaveChanges();
+        }
     }
 }

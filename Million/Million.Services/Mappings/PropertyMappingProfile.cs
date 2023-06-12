@@ -8,7 +8,11 @@ namespace Million.Services.Mappings
     {
         public PropertyMappingProfile()
         {
-            CreateMap<Property, PropertyResponse>();
+            CreateMap<Property, PropertyResponse>()
+                .ReverseMap();
+
+            CreateMap<Property, PropertyRequest>()
+                .ReverseMap();
         }
     }
 }

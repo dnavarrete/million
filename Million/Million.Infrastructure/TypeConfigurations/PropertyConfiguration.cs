@@ -12,6 +12,9 @@ namespace Million.Infrastructure.TypeConfigurations
 
             builder.HasKey(p => p.Id);
 
+            builder.Property(p => p.Id)
+                .HasColumnName("IdProperty");
+
             builder.Property(p => p.Name)
                 .IsRequired()
                 .HasMaxLength(70);

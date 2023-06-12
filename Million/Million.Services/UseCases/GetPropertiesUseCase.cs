@@ -1,4 +1,5 @@
-﻿using Million.Core;
+﻿using AutoMapper;
+using Million.Core;
 using Million.Core.Entities;
 using Million.Core.Models;
 using Million.Services.Filters;
@@ -9,10 +10,12 @@ namespace Million.Services.UseCases
 {
     public sealed class GetPropertiesUseCase
     {
+        private readonly IMapper _mapper;
         private readonly IRepository<Property> _repository;
 
-        public GetPropertiesUseCase(IRepository<Property> repository) 
+        public GetPropertiesUseCase(IMapper mapper, IRepository<Property> repository) 
         {
+            _mapper = mapper;
             _repository = repository;
         }
 
@@ -36,7 +39,8 @@ namespace Million.Services.UseCases
             }
 
             var properties = _repository.Get(filterExpression);
-            return Enumerable.Empty<PropertyResponse>();
+            var mappedProperties = _mapper.Map<IEnumerable<PropertyResponse>>(properties);
+            return mappedProperties;
         }
     }
 }
