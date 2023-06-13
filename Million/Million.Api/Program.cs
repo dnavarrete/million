@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Million.Api.Filters;
 using Million.Core;
 using Million.Infrastructure;
 using Million.Services.Mappings;
@@ -12,7 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<MillionContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(typeof(PropertyMappingProfile).Assembly);
-builder.Services.AddControllers().AddNewtonsoftJson();
+builder.Services.AddControllers(options => 
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+}).AddNewtonsoftJson();
 
 builder.Services.AddScoped<GetPropertiesUseCase>();
 builder.Services.AddScoped<CreatePropertyUseCase>();

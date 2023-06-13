@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using Million.Api.Filters;
 using Million.Core.Models;
 using Million.Services.Filters;
 using Million.Services.UseCases.PropertyImagesUseCases;
@@ -34,7 +35,9 @@ namespace Million.Api.Controllers
         }
 
         [HttpPost]
+        [ValidateModelState]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateProperty([FromBody] PropertyRequest propertyRequest)
         {
@@ -43,7 +46,9 @@ namespace Million.Api.Controllers
         }
 
         [HttpPost("image")]
+        [ValidateModelState]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreatePropertyImage([FromBody] PropertyImageRequest propertyImageRequest)
         {
@@ -52,7 +57,9 @@ namespace Million.Api.Controllers
         }
 
         [HttpPatch("{id}")]
+        [ValidateModelState]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdateProperty(Guid id, [FromBody] JsonPatchDocument<PropertyRequest> patchDocument)
         {
@@ -62,8 +69,10 @@ namespace Million.Api.Controllers
             return Ok(property);
         }
 
+        [ValidateModelState]
         [HttpPatch("{id}/price")]
         [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult UpdatePriceProperty(Guid id, [FromBody] PropertyPriceRequest propertyPriceRequest)
         {

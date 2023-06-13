@@ -17,6 +17,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Dominio", "3. Dominio", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Million.Services", "Million.Services\Million.Services.csproj", "{56854460-0742-4380-BF85-431796E6B033}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Test", "4. Test", "{E6DE7A5C-3584-496C-8C33-3002A0FE0045}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MillionNunit", "MillionNunit\MillionNunit.csproj", "{612C39FF-293F-4286-A9C6-6B52FA60EC4B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,10 @@ Global
 		{56854460-0742-4380-BF85-431796E6B033}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{56854460-0742-4380-BF85-431796E6B033}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{56854460-0742-4380-BF85-431796E6B033}.Release|Any CPU.Build.0 = Release|Any CPU
+		{612C39FF-293F-4286-A9C6-6B52FA60EC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{612C39FF-293F-4286-A9C6-6B52FA60EC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{612C39FF-293F-4286-A9C6-6B52FA60EC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{612C39FF-293F-4286-A9C6-6B52FA60EC4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,6 +56,7 @@ Global
 		{B75D6CD9-7CD1-4F5A-8579-EFD851302731} = {FE5DB802-71E3-4115-8225-9C4643B2BF01}
 		{3901172E-AA74-4CFB-BC0A-CC0828ED84BA} = {FE5DB802-71E3-4115-8225-9C4643B2BF01}
 		{56854460-0742-4380-BF85-431796E6B033} = {D99AD66A-C4B8-4E17-AB23-4B8B28293734}
+		{612C39FF-293F-4286-A9C6-6B52FA60EC4B} = {E6DE7A5C-3584-496C-8C33-3002A0FE0045}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {57FD8335-7C4E-4A17-A090-33283814EA8A}
