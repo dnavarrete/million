@@ -65,10 +65,8 @@ namespace Million.Api.Controllers
         [HttpPatch("{id}/price")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult UpdatePriceProperty(Guid id, [FromBody] JsonPatchDocument<PropertyPriceRequest> patchDocument)
+        public IActionResult UpdatePriceProperty(Guid id, [FromBody] PropertyPriceRequest propertyPriceRequest)
         {
-            var propertyPriceRequest = new PropertyPriceRequest();
-            patchDocument.ApplyTo(propertyPriceRequest);
             var property = _updatePropertyUseCase.ExecuteUpdatePrice(id, propertyPriceRequest);
             return Ok(property);
         }
