@@ -27,25 +27,41 @@ namespace Million.Services.UseCases.PropertyUseCases
                 return default!;
             }
 
-            ReplaceIfChanged(ref property, p => p.Year, propertyRequest.Year);
-            ReplaceIfChanged(ref property, p => p.Price, propertyRequest.Price);
-            ReplaceIfChanged(ref property, p => p.Address, propertyRequest.Address);
-            ReplaceIfChanged(ref property, p => p.Name, propertyRequest.Name);
+            if (propertyRequest.Year != default && property.Year != propertyRequest.Year)
+            {
+                property.Year = propertyRequest.Year;
+            }
+
+            if (!string.IsNullOrEmpty(propertyRequest.Address) && property.Address != propertyRequest.Address)
+            {
+                property.Address = propertyRequest.Address;
+            }
+
+            if (!string.IsNullOrEmpty(propertyRequest.Name) && property.Name != propertyRequest.Name)
+            {
+                property.Name = propertyRequest.Name;
+            }
 
             var updatedProperty = _repository.Update(property);
             return _mapper.Map<PropertyResponse>(updatedProperty);
         }
 
-        private static void ReplaceIfChanged<TEntity, TProperty>(ref TEntity entity, Expression<Func<TEntity, TProperty>> propertyExpression, TProperty newValue) where TEntity : class
+        public PropertyResponse ExecuteUpdatePrice(Guid id, PropertyPriceRequest propertyPriceRequest)
         {
-            var memberExpression = propertyExpression.Body as MemberExpression;
-            var propertyInfo = memberExpression?.Member as PropertyInfo;
-            var currentValue = propertyInfo?.GetValue(entity);
+            var property = _repository.Find(id);
 
-            if (propertyInfo is not null && newValue != null && !Equals(newValue, default) && !Equals(currentValue, newValue) && !(newValue is string strValue && string.IsNullOrEmpty(strValue)))
+            if (property == null)
             {
-                propertyInfo.SetValue(entity, newValue);
+                return default!;
             }
+
+            if (propertyPriceRequest.Price != default && property.Price != propertyPriceRequest.Price)
+            {
+                property.Price = propertyPriceRequest.Price;
+            }
+
+            var updatedProperty = _repository.Update(property);
+            return _mapper.Map<PropertyResponse>(updatedProperty);
         }
     }
 }

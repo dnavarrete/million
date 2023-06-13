@@ -58,8 +58,19 @@ namespace Million.Api.Controllers
         {
             var propertyRequest = new PropertyRequest();
             patchDocument.ApplyTo(propertyRequest);
-            var propertyImage = _updatePropertyUseCase.Execute(id, propertyRequest);
-            return Ok(propertyImage);
+            var property = _updatePropertyUseCase.Execute(id, propertyRequest);
+            return Ok(property);
+        }
+
+        [HttpPatch("{id}/price")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult UpdatePriceProperty(Guid id, [FromBody] JsonPatchDocument<PropertyPriceRequest> patchDocument)
+        {
+            var propertyPriceRequest = new PropertyPriceRequest();
+            patchDocument.ApplyTo(propertyPriceRequest);
+            var property = _updatePropertyUseCase.ExecuteUpdatePrice(id, propertyPriceRequest);
+            return Ok(property);
         }
     }
 }
