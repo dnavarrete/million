@@ -12,11 +12,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddDbContext<MillionContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddAutoMapper(typeof(PropertyMappingProfile).Assembly);
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddNewtonsoftJson();
 
 builder.Services.AddScoped<GetPropertiesUseCase>();
 builder.Services.AddScoped<CreatePropertyUseCase>();
 builder.Services.AddScoped<AddPropertyImageUseCase>();
+builder.Services.AddScoped<UpdatePropertyUseCase>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(RepositoryBase<>));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

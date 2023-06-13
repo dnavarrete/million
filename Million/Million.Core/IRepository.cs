@@ -6,6 +6,10 @@ namespace Million.Core
     {
         IEnumerable<T> Get(Expression<Func<T, bool>> predicate);
 
-        void Insert(T entity);
+        T Insert(T entity);
+
+        T? Find(params object[] keys);
+
+        T Update(T entity);
     }
 }

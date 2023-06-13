@@ -12,15 +12,28 @@ namespace Million.Infrastructure
             _context = context;
         }
 
+        public T? Find(params object[] keys)
+        {
+            return _context.Set<T>().Find(keys);
+        }
+
         public IEnumerable<T> Get(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate);
         }
 
-        public void Insert(T entity)
+        public T Insert(T entity)
         {
-            _context.Set<T>().Add(entity);
+            var addedEntity = _context.Set<T>().Add(entity);
             _context.SaveChanges();
+            return addedEntity.Entity;
+        }
+
+        public T Update(T entity)
+        {
+            var updatedEntity = _context.Set<T>().Update(entity);
+            _context.SaveChanges();
+            return updatedEntity.Entity;
         }
     }
 }

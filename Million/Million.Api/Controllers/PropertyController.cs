@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc;
 using Million.Core.Models;
 using Million.Services.Filters;
 using Million.Services.UseCases.PropertyImagesUseCases;
@@ -13,12 +14,14 @@ namespace Million.Api.Controllers
         private readonly GetPropertiesUseCase _getPropertiesUseCase;
         private readonly CreatePropertyUseCase _createPropertyUseCase;
         private readonly AddPropertyImageUseCase _addPropertyImageUseCase;
+        private readonly UpdatePropertyUseCase _updatePropertyUseCase;
 
-        public PropertyController(GetPropertiesUseCase getPropertiesUseCase, CreatePropertyUseCase createPropertyUseCase, AddPropertyImageUseCase addPropertyImageUseCase)
+        public PropertyController(GetPropertiesUseCase getPropertiesUseCase, CreatePropertyUseCase createPropertyUseCase, AddPropertyImageUseCase addPropertyImageUseCase, UpdatePropertyUseCase updatePropertyUseCase)
         {
             _getPropertiesUseCase = getPropertiesUseCase;
             _createPropertyUseCase = createPropertyUseCase;
             _addPropertyImageUseCase = addPropertyImageUseCase;
+            _updatePropertyUseCase = updatePropertyUseCase;
         }
 
         [HttpGet]
@@ -45,6 +48,17 @@ namespace Million.Api.Controllers
         public IActionResult CreatePropertyImage([FromBody] PropertyImageRequest propertyImageRequest)
         {
             var propertyImage = _addPropertyImageUseCase.Execute(propertyImageRequest);
+            return Ok(propertyImage);
+        }
+
+        [HttpPatch("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult UpdateProperty(Guid id, [FromBody] JsonPatchDocument<PropertyRequest> patchDocument)
+        {
+            var propertyRequest = new PropertyRequest();
+            patchDocument.ApplyTo(propertyRequest);
+            var propertyImage = _updatePropertyUseCase.Execute(id, propertyRequest);
             return Ok(propertyImage);
         }
     }
